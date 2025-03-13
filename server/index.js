@@ -16,12 +16,12 @@ let users = [];
 //เริ่มต้นการเชื่อมต่อกับ MySQL
 let conn = null;
 const initMySQL = async () => {
-     conn = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'root',
-            database: 'webdb',
-            port: 8830
+    conn = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'root',
+        database: 'webdb',
+        port: 8830
     })
 };
 
@@ -64,7 +64,7 @@ const validateData = (userData) => {
 //         .catch((error) => {
 //             console.log(error, error.message);
 //             res.status(500).json({error: 'Error fetching users'})
-            
+
 //         });
 //     });
 // });
@@ -85,19 +85,19 @@ app.get('/testdbnew/',async (req, res) => {
 
 
 // path:GET  /users ใช้สำหรับแสดงข้อมูล user ทั้งหมด
-app.get('/users',async (req, res) => { 
+app.get('/users', async (req, res) => {
     const result = await conn.query('SELECT * FROM users');
     res.json(result[0])
 });
 
 
 // path:Post /user ใช้สำหรับสร้างข้อมูล user ใหม่
-app.post('/users',async (req, res) => {    
-    try{
+app.post('/users', async (req, res) => {
+    try {
         let user = req.body;
         const errors = validateData(user)
-        if(errors.length > 0){
-            throw{
+        if (errors.length > 0) {
+            throw {
                 statusCode: 400,
                 message: 'กรุณากรอกข้อมูลให้ครบถ้วน',
                 errors: errors
@@ -108,45 +108,45 @@ app.post('/users',async (req, res) => {
             message: 'Create new user successfully',
             data: result[0]
         });
-    }catch (error) {
+    } catch (error) {
         const errorMessage = error.message || 'Something went wrong';
         const errors = error.errors || [];
         console.error('error message:', error.message)
         res.status(500).json({
-          message :errorMessage,
-          errors: errors    
-          //errorMessage : error.message
-        })        
-    }   
+            message: errorMessage,
+            errors: errors
+            //errorMessage : error.message
+        })
+    }
 })
 
 
 // path:GET  /users/:id สำหรับดึงข้อมูล user รายคนออกมา
-app.get('/users/:id',async (req, res) => { 
-    try{
-   let id = req.params.id;
-   //ค้นหา user หรือ index ของ user ที่ต้องการดึงข้อมูล
-   const results = await conn.query('SELECT * FROM users WHERE id = ?', id);
-   //let selectedIndex = users.findIndex(user => user.id == id);
-   if(results[0].length == 0){
-    throw {statusCode: 404, message: 'User not found'};
-    //res.json(results[0][0])
-   }//res.json(results[0][0])
-   /*else{
-    throw new Error('User not found');
-    res.status(404).json({
-    message: 'User not found'
-    })
-   }*/
-   res.json(results[0][0]);  
-    //res.json(users[selectedIndex]);
-    }catch(error){
+app.get('/users/:id', async (req, res) => {
+    try {
+        let id = req.params.id;
+        //ค้นหา user หรือ index ของ user ที่ต้องการดึงข้อมูล
+        const results = await conn.query('SELECT * FROM users WHERE id = ?', id);
+        //let selectedIndex = users.findIndex(user => user.id == id);
+        if (results[0].length == 0) {
+            throw { statusCode: 404, message: 'User not found' };
+            //res.json(results[0][0])
+        }//res.json(results[0][0])
+        /*else{
+         throw new Error('User not found');
+         res.status(404).json({
+         message: 'User not found'
+         })
+        }*/
+        res.json(results[0][0]);
+        //res.json(users[selectedIndex]);
+    } catch (error) {
         let statusCode = error.statusCode || 500;
-      //console.error('error :', error.message)
-      res.status(500).json({
-        message :'Something went wrong',
-        //errorMessage : error.message
-      })   
+        //console.error('error :', error.message)
+        res.status(500).json({
+            message: 'Something went wrong',
+            //errorMessage : error.message
+        })
     }
 });
 
@@ -156,28 +156,28 @@ app.get('/users/:id',async (req, res) => {
 app.put('/users/:id', async (req, res) => {
     //let id = req.params.id;
     //let updateUser = req.body;
-    try{
+    try {
         let id = req.params.id;
         let updateUser = req.body;
         const result = await conn.query(
-            'UPDATE users SET ? WHERE id = ?', 
-            [updateUser,id]);
+            'UPDATE users SET ? WHERE id = ?',
+            [updateUser, id]);
         res.json({
             message: 'Update user successfully',
             data: result[0]
         });
-    }catch (err) {
+    } catch (err) {
         //console.error('error :', error.message)
         res.status(500).json({
-          message :'Something went wrong',
-          //errorMessage : error.message
-        })        
-    }   
+            message: 'Something went wrong',
+            //errorMessage : error.message
+        })
+    }
     //let selectedIndex = users.findIndex(user => user.id == id);
-        //users[selectedIndex].firstname = updateUser.firstname || users[selectedIndex].firstname;
-        //users[selectedIndex].lastname = updateUser.lastname || users[selectedIndex].lastname;
-        //users[selectedIndex].age = updateUser.age || users[selectedIndex].age;
-        //users[selectedIndex].gender = updateUser.gender || users[selectedIndex];
+    //users[selectedIndex].firstname = updateUser.firstname || users[selectedIndex].firstname;
+    //users[selectedIndex].lastname = updateUser.lastname || users[selectedIndex].lastname;
+    //users[selectedIndex].age = updateUser.age || users[selectedIndex].age;
+    //users[selectedIndex].gender = updateUser.gender || users[selectedIndex];
 
     /*res.json({
         message: 'Update user successfully',
@@ -187,11 +187,11 @@ app.put('/users/:id', async (req, res) => {
         }
     })*/
 });
- 
+
 
 //path: Delete /user/:id ใช้สำหรับลบข้อมูล user โดยใช้ id ในการระบุ
 app.delete('/users/:id', async (req, res) => {
-    try{
+    try {
         let id = req.params.id;
         //let updateUser = req.body;
         const result = await conn.query('DELETE from users WHERE id = ?', id)
@@ -199,27 +199,27 @@ app.delete('/users/:id', async (req, res) => {
             message: 'Delete user successfully',
             data: result[0]
         });
-    }catch (err) {
+    } catch (err) {
         //console.error('error :', error.message)
         res.status(500).json({
-          message :'Something went wrong',
-          //errorMessage : error.message
-        })        
-    }   
-    });
-    
-    ///let id = req.params.id;
-    /*let selectedIndex = users.findIndex(user => user.id == id);
-    //ลบ
-    users.splice(selectedIndex, 1);
-    res.json({
-        message: 'Delete user successfully',
-        index: selectedIndex
-    });
+            message: 'Something went wrong',
+            //errorMessage : error.message
+        })
+    }
+});
+
+///let id = req.params.id;
+/*let selectedIndex = users.findIndex(user => user.id == id);
+//ลบ
+users.splice(selectedIndex, 1);
+res.json({
+    message: 'Delete user successfully',
+    index: selectedIndex
+});
 });*/
-app.listen(port,async (req, res) => {
+app.listen(port, async (req, res) => {
     await initMySQL();
-  console.log('Http Server is running on port' + port);
+    console.log('Http Server is running on port' + port);
 })
 
 

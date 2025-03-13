@@ -4,7 +4,6 @@ window.onload = async () => {
     await loadData();
 }
 
-
 const loadData = async () => {
     console.log('user page loaded');
     //1. load user ทั้งหมด จาก API ที่เตรียมไว้
@@ -14,16 +13,19 @@ const loadData = async () => {
     const userDOM = document.getElementById('user');
     //2. นำ user ทั้งหมดโหลดกลับเข้าไปใน html
 
-    let htmlData = '<div>'
+    let htmlData = '';
     for (let i = 0; i < response.data.length; i++) {
         let user = response.data[i];
-        htmlData += `<div>
-       ${user.id}${user.firstname}${user.lastname}
-       <a href='index1.html?id=${user.id}'><button>Edit</button></a>
-       <button class = 'delete' data-id='${user.id}'>Delete</button>
-      </div>`
+        htmlData += `<tr>
+            <td>${user.id}</td>
+            <td>${user.firstname}</td>
+            <td>${user.lastname}</td>
+            <td class="actions">
+                <a href='index1.html?id=${user.id}'><button>Edit</button></a>
+                <button class='delete' data-id='${user.id}'>Delete</button>
+            </td>
+        </tr>`;
     }
-    htmlData += '</div>'
     userDOM.innerHTML = htmlData;
 
     //3.ลบ user
@@ -38,9 +40,10 @@ const loadData = async () => {
             } catch (error) {
                 console.log('error', error);
             }
-        })
+        });
     }
 }
-
-
- 
+/*<td>${user.age}</td>
+<td>${user.gender}</td>
+<td>${user.interests}</td>
+<td>${user.description}</td>*/
