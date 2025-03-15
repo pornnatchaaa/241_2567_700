@@ -20,9 +20,12 @@ const loadData = async () => {
             <td>${user.id}</td>
             <td>${user.firstname}</td>
             <td>${user.lastname}</td>
+            <td>${user.age}</td>
             <td class="actions">
+            <a>
                 <a href='index1.html?id=${user.id}'><button>Edit</button></a>
                 <button class='delete' data-id='${user.id}'>Delete</button>
+                </a>
             </td>
         </tr>`;
     }

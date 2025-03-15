@@ -6,7 +6,7 @@
         }
 
         body {
-            background-color: rgb(223, 243, 255);
+            background-color: #D9EAFD;
             font-family: 'Kanit';
             font-size: 14px;
         }
@@ -19,6 +19,47 @@
             background-color: rgb(255, 234, 247);
             padding: 20px;
             box-sizing: border-box;
+            border-radius: 10px;
+        }
+
+        .small-button {
+            display: inline-block;
+            padding: 5px 8px; /* ลด padding */
+            background-color: #667BC6;
+            color: white;
+            text-decoration: none;
+            font-size: 12px; /* ลดขนาดฟอนต์ */
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+
+        }
+
+        .small-button:hover {
+            transform: scale(1.05);
+            background-color: #D17D98; 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); //เพิ่มเงา
+        }
+
+        .small-button1 {
+            display: inline-block;
+            padding: 5px 8px; /* ลด padding */
+            background-color: #667BC6;
+            color: white;
+            text-decoration: none;
+            font-size: 12px; /* ลดขนาดฟอนต์ */
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+
+        }
+
+        .small-button1:hover {
+            transform: scale(1.05); 
+            background-color: #D17D98;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); //เพิ่มเงา
         }
 
         .header{
@@ -51,9 +92,15 @@
 
         .button{
             border: 2px solid #E7BCDE;
-            background-color: rgb(255, 197, 216); 
+            background-color: #E3A5C7; 
             width: 50%;
             height: 40px;
+            border-radius: 4px;
+        }
+        .button:hover{
+            transform: scale(1.05); 
+            background-color: #D9EAFD;
+            transition: transform 0.2s ease, opacity 0.3s ease;
         }
         .message{
             margin-bottom: 20px;
@@ -78,14 +125,21 @@
             border-collapse: collapse;
             margin-top: 20px;
             background:#FFFDF0; /* สีพื้นหลังของตาราง */
-            margin-left:2px
+            margin-left:2px;
+            border-radius: 4px;
             
         }
+
+        tr:nth-child(even) {
+            background-color: #E5D9F2; /* แถวที่เป็นเลขคู่ */
+        }
+
 
         th, td {
             border: 1px solid #ddd; 
             padding: 8px;
             text-align: auto;
+
         }
 
         th {
@@ -111,18 +165,25 @@
             color: white;
             cursor: pointer;
             border-radius: 4px;
+            margin-left: 30px;
+            
         }
 
         .actions button:hover {
             background-color: #FFB4A2; //สีสำหรับปุ่มDelete ขณะ hover
+            transform: scale(1.03); 
+            transition: transform 0.2s ease, opacity 0.3s ease;
         }
 
         .actions a button {
-            background-color: #FBF3B9; //สีสำหรับปุ่มEdit
+            background-color: #FBF3B9; //สีสำหรับปุ่มEdit  
+            
         }
 
         .actions a button:hover {
             background-color: #D9EAFD; //สีสำหรับปุ่มEdit ขณะ hover
+            transform: scale(1.03); 
+            transition: transform 0.2s ease, opacity 0.3s ease;
         }
     222
 
@@ -137,4 +198,4 @@
         width: 100%;
     }
     
-}
+}   

@@ -111,7 +111,8 @@ app.post('/users', async (req, res) => {
     } catch (error) {
         const errorMessage = error.message || 'Something went wrong';
         const errors = error.errors || [];
-        console.error('error message:', error.message)
+        console.error('error message:',
+             error.message)
         res.status(500).json({
             message: errorMessage,
             errors: errors
